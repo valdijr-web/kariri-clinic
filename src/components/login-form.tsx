@@ -58,7 +58,7 @@ export function LoginForm({
           <Image src={logo} alt="Logo Kariri Saúde" className="mx-auto mb-4 w-25" />
           <CardTitle className="text-xl">Bem vindo de volta</CardTitle>
           <CardDescription>
-            Faça login com sua conta Google.
+            Faça login com sua conta.
           </CardDescription>
         </CardHeader>
         <CardContent>
