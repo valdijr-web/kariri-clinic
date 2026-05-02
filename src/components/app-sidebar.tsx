@@ -57,6 +57,14 @@ const data = {
         />
       ),
     },
+      {
+      title: "Perfil",
+      url: "/profile",
+      icon: (
+        <ChartBarIcon
+        />
+      ),
+    },
   ],
   navClouds: [
     {

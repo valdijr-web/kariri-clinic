@@ -25,7 +25,7 @@ export function useAuth() {
     }
     console.log('Loading user...');
     loadUser();
-  }, [setUser]);
+  }, []);
 
   return { user };
 }

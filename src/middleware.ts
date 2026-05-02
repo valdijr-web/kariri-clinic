@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 //import * as jose from 'jose'; // biblioteca para verificar JWT no Edge
 
 // Lista de rotas que não exigem autenticação
-const publicRoutes = ['/login', '/register'];
+const publicRoutes = ['/login', '/signup'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

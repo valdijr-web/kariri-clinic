@@ -1,7 +1,8 @@
 export async function apiFetch(
     url: string,
-    options: RequestInit = {}
-){
+    options: RequestInit = {},
+    refresh: boolean = true
+) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
         ...options,
         credentials: 'include', // envia access_token cookie
@@ -12,7 +13,7 @@ export async function apiFetch(
     });
 
     // 🔥 se expirou, tenta refresh
-    if (res.status === 401) {
+    if (!res.ok && res.status === 401 && refresh) {
         const refreshed = await refreshToken();
 
         if (refreshed) {

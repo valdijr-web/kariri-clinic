@@ -91,7 +91,7 @@ export function LoginForm({
               <Field>
                 <Button type="submit">Entrar</Button>
                 <FieldDescription className="text-center">
-                  Não tem uma conta? <a href="#">Cadastre-se</a>
+                  Não tem uma conta? <a href="/signup">Cadastre-se</a>
                 </FieldDescription>
               </Field>
               <Field>
