@@ -10,6 +10,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
+import { cn } from "@/lib/utils";
 
 // const columns = [
 //   {
@@ -179,14 +180,14 @@ export function TransactionsDataTable() {
               <DropdownMenuSeparator />
 
               {/* 5. Agora você pode usar o router.push diretamente no onClick */}
-              <DropdownMenuItem onClick={() => router.push(`/usuarios/${user.id}`)}>
+              <DropdownMenuItem  onClick={() => router.push(`/usuarios/${user.id}`)}>
                 Ver Detalhes
               </DropdownMenuItem>
 
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => table.options.meta?.handleDeleteRow(user.id, user.friendly_id)}
-                className="text-red-600 focus:text-red-600"
+                className={cn("text-red-600 focus:text-red-600 cursor-pointer")}
               >
                 Excluir
               </DropdownMenuItem>

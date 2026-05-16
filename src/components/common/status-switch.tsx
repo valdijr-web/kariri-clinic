@@ -1,6 +1,7 @@
 // components/StatusSwitch.tsx
 import { Switch } from "@/components/ui/switch";
 import { useToggleStatus } from "@/hooks/useToggleStatus";
+import { cn } from "@/lib/utils";
 
 interface StatusSwitchProps {
   active: boolean;
@@ -16,5 +17,5 @@ export function StatusSwitch({ active, endpointUrl, onSuccess }: StatusSwitchPro
     if (success) onSuccess?.();
   };
 
-  return <Switch checked={active} onCheckedChange={handleToggle} disabled={isLoading} />;
+  return <Switch className={cn("cursor-pointer")} checked={active} onCheckedChange={handleToggle} disabled={isLoading} />;
 }

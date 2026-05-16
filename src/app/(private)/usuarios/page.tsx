@@ -16,7 +16,7 @@ export default async function UsersPage() {
         <div className="container mx-auto py-5 ">
             <div className="flex flex-col gap-5 mb-5">
                 <h1 className="text-2xl font-bold ">Gestão de Usuários</h1>
-                <Button className="self-start cursor-pointer" >
+                <Button className="self-start" >
                     <CirclePlusIcon />
                     <span>Adicionar Usuário</span></Button>
             </div>
