@@ -1,8 +1,9 @@
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { DataTable } from "@/components/data-table";
-import { SectionCards } from "@/components/section-cards";
+import { ChartAreaInteractive } from "@/components/layout/chart-area-interactive";
+
 
 import data from "./data.json"
+import { SectionCards } from '@/components/layout/section-cards';
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Kariri Clinic - Dashboard",
@@ -18,7 +19,7 @@ export default function Page() {
           <div className="px-4 lg:px-6">
             <ChartAreaInteractive />
           </div>
-          <DataTable data={data} />
+          
         </div>
       </div>
     </div>

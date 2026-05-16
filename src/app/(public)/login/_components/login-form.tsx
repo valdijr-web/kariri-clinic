@@ -1,3 +1,4 @@
+'use client'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,7 +19,7 @@ import { Input } from "@/components/ui/input"
 import { refreshToken } from "@/services/api"
 import { useRouter } from 'next/navigation'
 import { useState } from "react"
-import logo from './logo-kariri-saude.png'
+import logo from '@/components/layout/logo-kariri-saude.png'
 import Image from "next/image"
 
 export function LoginForm({
@@ -31,26 +32,27 @@ export function LoginForm({
   const router = useRouter();
 
   async function handleLogin(e: React.FormEvent) {
-      e.preventDefault();
-  
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-          credentials: 'include', // recebe access_token e adiciona cookies automaticamente
-        }
-      );
-  
-      if (!res.ok) {
-        alert('Login inválido');
-        return;
+    e.preventDefault();
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include', // recebe access_token e adiciona cookies automaticamente
       }
-      //Executa do refresh para garantir que o cookie seja atualizao no login como estratégia de segurança.
-      await refreshToken();
-      router.push('/');
+    );
+
+    if (!res.ok) {
+      alert('Login inválido');
+      return;
     }
+    //Executa do refresh para garantir que o cookie seja atualizao no login como estratégia de segurança.
+    await refreshToken();
+    router.push('/');
+    router.refresh(); // 🔥 importante
+  }
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>

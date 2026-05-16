@@ -1,0 +1,26 @@
+// app/users/page.tsx
+import { apiServerFetch } from "@/services/api-server";
+
+import { TransactionsDataTable } from "./_components/transactions-datatable";
+import { Button } from "@/components/ui/button";
+import { CirclePlusIcon } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kariri Clinic - Usuários",
+  description: "Gestor de Clínicas",
+};
+export default async function UsersPage() {
+
+    return (
+        <div className="container mx-auto py-5 ">
+            <div className="flex flex-col gap-5 mb-5">
+                <h1 className="text-2xl font-bold ">Gestão de Usuários</h1>
+                <Button className="self-start cursor-pointer" >
+                    <CirclePlusIcon />
+                    <span>Adicionar Usuário</span></Button>
+            </div>
+            <TransactionsDataTable />
+        </div>
+    );
+}

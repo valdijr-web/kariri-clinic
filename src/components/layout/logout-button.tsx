@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../../hooks/useAuth';
 import { apiFetch } from '@/services/api';
 
 export default function LogoutButton() {

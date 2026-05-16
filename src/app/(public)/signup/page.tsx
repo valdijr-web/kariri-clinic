@@ -1,5 +1,5 @@
-import SignupForm from '@/components/signup-form';
-import logo from '../../../components/logo-kariri-saude.png';
+import SignupForm from '@/app/(public)/signup/_components/signup-form';
+import logo from '@/components/layout/logo-kariri-saude.png';
 import Image from "next/image"
 import { GalleryVerticalEnd, InboxIcon, StarIcon, PhoneIcon, GlobeIcon, CreditCardIcon } from 'lucide-react';
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@/components/ui/item';

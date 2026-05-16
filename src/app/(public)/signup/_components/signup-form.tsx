@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { SignUpFormSchema, signUpFormSchema } from '@/schemas/signup-schema';
 import { apiFetch, refreshToken } from '@/services/api';
-import { Field, FieldDescription, FieldGroup, FieldLabel } from './ui/field';
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { cn } from '@/lib/utils';
 
 export default function SignupForm({

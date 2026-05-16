@@ -1,3 +1,4 @@
+'use client'
 export async function apiFetch(
     url: string,
     options: RequestInit = {},
