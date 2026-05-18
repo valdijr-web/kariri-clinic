@@ -240,11 +240,12 @@ export function DataTable<TData, TValue>({
   const handleDeleteSelected = () => {
     const selectedRows = table.getSelectedRowModel().rows;
     const idsToDelete = selectedRows.map((row: any) => row.original.id);
+    const friendlyIdsToDelete = selectedRows.map((row: any) => row.original.friendly_id);
     if (idsToDelete.length === 0) return;
 
     confirm({
       title: "Confirmar exclusão em massa",
-      description: `Você está prestes a deletar ${idsToDelete.length} ${modelName}. IDs: ${idsToDelete.join(", ")}. Essa ação não pode ser desfeita.`,
+      description: `Você está prestes a deletar ${idsToDelete.length} ${modelName}. IDs: ${friendlyIdsToDelete.join(", ")}. Essa ação não pode ser desfeita.`,
       confirmText: "Deletar",
       destructive: true,
       onConfirm: async () => {
@@ -252,7 +253,7 @@ export function DataTable<TData, TValue>({
           // Chamada real para sua API (substitua o alert)
           const response = await apiFetch(urlDeleteBulk, {
             method: "DELETE",
-            body: JSON.stringify({ ids: idsToDelete }),
+            body: JSON.stringify({ user_ids: idsToDelete }),
           });
           const data = await response.json();
 
@@ -264,7 +265,7 @@ export function DataTable<TData, TValue>({
           mutate();
 
         } catch (error: any) {
-          toast.error(data.message);
+          toast.error(error.message);
         }
 
       },
