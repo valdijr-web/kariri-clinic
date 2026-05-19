@@ -1,5 +1,5 @@
 'use client'
-import { ConfirmDialog } from "@/components/common/confirm-dialog";
+import { ConfirmDialog, DialogVariant} from "@/components/common/confirm-dialog";
 import { useState, useCallback } from "react";
 
 interface ConfirmOptions {
@@ -7,7 +7,7 @@ interface ConfirmOptions {
     description?: string;
     confirmText?: string;
     cancelText?: string;
-    destructive?: boolean;
+    variant?: DialogVariant;
     onConfirm: () => void | Promise<void>;
 }
 
@@ -23,7 +23,7 @@ export function useConfirm() {
     const close = useCallback(() => {
         setIsOpen(false);
         setOptions(null);
-    });
+    }, []);
 
     const ConfirmDialogComponent = useCallback(() => {
         if (!options) return null;
@@ -35,7 +35,7 @@ export function useConfirm() {
                 description={options.description}
                 confirmText={options.confirmText}
                 cancelText={options.cancelText}
-                destructive={options.destructive}
+                variant={options.variant}
                 onConfirm={options.onConfirm}
             />
         );

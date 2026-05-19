@@ -7,7 +7,7 @@ import { DataTable } from "@/components/common/datatable";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { User } from "@/types/user";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
@@ -179,17 +179,17 @@ export function TransactionsDataTable() {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
 
-              {/* 5. Agora você pode usar o router.push diretamente no onClick */}
-              <DropdownMenuItem  onClick={() => router.push(`/usuarios/${user.id}`)}>
+              <DropdownMenuItem onClick={() => router.push(`/usuarios/${user.id}`)}>
                 Ver Detalhes
               </DropdownMenuItem>
 
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => table.options.meta?.handleDeleteRow(user.id, user.friendly_id)}
-                className={cn("text-red-600 focus:text-red-600 cursor-pointer")}
+                variant="destructive"
               >
-                Excluir
+                <Trash2Icon />
+                <span>Excluir</span>
               </DropdownMenuItem>
 
             </DropdownMenuContent>
@@ -205,6 +205,6 @@ export function TransactionsDataTable() {
     url="/users"
     sortColumns={["friendly_id", "name", "email", "created_at"]}
     urlDeleteBulk="/users/bulk"
-    modelName="Usuários"
+    modelName="Usuário"
   />;
 }

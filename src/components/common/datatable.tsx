@@ -159,10 +159,13 @@ export function DataTable<TData, TValue>({
 
   }, [metadata]);
 
-  const handleDeleteRow = (rowId: number, friendlyId) => {
+  const handleDeleteRow = (rowId: number, friendlyId: number) => {
     confirm({
-      title: "Excluir registro",
+      title: "Excluir registro?",
       description: `Tem certeza que deseja excluir o registro ${friendlyId}?`,
+      confirmText: "Excluir",
+      cancelText: "Cancelar",
+      variant: "danger",
       onConfirm: async () => {
         try {
           // Chamada real para sua API (substitua o alert)
@@ -179,7 +182,7 @@ export function DataTable<TData, TValue>({
           toast.success(data.message);
 
         } catch (error: any) {
-          toast.error(data.message);
+          toast.error(error.message);
         }
       },
     });
@@ -200,6 +203,7 @@ export function DataTable<TData, TValue>({
     meta: {
       handleDeleteRow,
       refreshData: mutate,
+      confirm:confirm,
     },
   });
 
@@ -219,35 +223,17 @@ export function DataTable<TData, TValue>({
     setQ(e.target.value);
   }
 
-  // Função para lidar com o delete em massa
-  // const handleDelete = () => {
-  //   // Pegamos os dados originais das linhas selecionadas
-  //   const selectedRows = table.getSelectedRowModel().rows;
-  //   const idsToDelete = selectedRows.map((row: any) => row.original.id);
-
-  //   if (idsToDelete.length === 0) return;
-
-  //   // Adiciona aqui confirmação de excluir registros
-  //   alert(
-  //     `Atenção!\n\nVocê está prestes a deletar ${idsToDelete.length} registros.\n` +
-  //     `IDs que seriam enviados para a API:\n${idsToDelete.join("\n")}`
-  //   );
-
-  //   // Após a ação, é boa prática limpar a seleção
-  //   setRowSelection({});
-  // };
-
   const handleDeleteSelected = () => {
     const selectedRows = table.getSelectedRowModel().rows;
     const idsToDelete = selectedRows.map((row: any) => row.original.id);
     const friendlyIdsToDelete = selectedRows.map((row: any) => row.original.friendly_id);
     if (idsToDelete.length === 0) return;
-
+    const nameChanged = idsToDelete.length > 1 ? modelName.toLowerCase() + "s" : modelName.toLowerCase();
     confirm({
-      title: "Confirmar exclusão em massa",
-      description: `Você está prestes a deletar ${idsToDelete.length} ${modelName}. IDs: ${friendlyIdsToDelete.join(", ")}. Essa ação não pode ser desfeita.`,
-      confirmText: "Deletar",
-      destructive: true,
+      title: "Confirmar exclusão em massa?",
+      description: `Você está prestes a excluir ${idsToDelete.length} ${nameChanged}. IDs: ${friendlyIdsToDelete.join(", ")}. Essa ação não pode ser desfeita.`,
+      confirmText: "Excluir",
+      variant: "danger",
       onConfirm: async () => {
         try {
           // Chamada real para sua API (substitua o alert)
@@ -295,50 +281,13 @@ export function DataTable<TData, TValue>({
               <SelectItem value="PAYMENT">Payment</SelectItem>
             </SelectContent>
           </Select>
-          {/* Botão de deletar */}
+          {/* Botão de excluir */}
           {table.getFilteredSelectedRowModel().rows.length > 0 && (
             <Button variant="destructive" onClick={handleDeleteSelected}>
               <Trash2 className="h-4 w-4" />
-              Deletar Selecionados ({table.getFilteredSelectedRowModel().rows.length})
+              Excluir Selecionados ({table.getFilteredSelectedRowModel().rows.length})
             </Button>
           )}
-
-          {/* <AlertDialog>
-            <AlertDialogTrigger asChild>
-              {table.getFilteredSelectedRowModel().rows.length > 0 && (
-                <Button
-                  variant="destructive"
-                  className="flex gap-2"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Deletar Selecionados ({table.getFilteredSelectedRowModel().rows.length})
-                </Button>
-
-              )}
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete your account
-                  from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                <AlertDialogAction>
-                  <Button
-
-                    onClick={() => {
-                      handleDelete();
-                    }}
-                  >
-                    Continue
-                  </Button>
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog> */}
 
         </div>
         <div>
