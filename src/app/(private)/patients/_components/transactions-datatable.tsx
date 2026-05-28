@@ -5,84 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTable } from "@/components/common/datatable";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { User } from "@/types/user";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
-
-// const columns = [
-//   {
-//     id: "friendly_id",
-//     header: "ID",
-//     accessorKey: "friendly_id",
-//   },
-//   {
-//     id: "name",
-//     header: "Nome",
-//     accessorKey: "name",
-//   },
-//   {
-//     id: "email",
-//     header: "Email",
-//     accessorKey: "email",
-//   },
-//   {
-//     id: "created_at",
-//     header: "Data de Cadastro",
-//     accessorKey: "created_at",
-//     cell: ({ row }) => {
-//       const date = new Date(row.getValue("created_at"));
-
-//       return new Intl.DateTimeFormat("pt-BR", {
-//         day: "2-digit",
-//         month: "2-digit",
-//         year: "numeric",
-//         hour: "2-digit", // Opcional: adicione se quiser exibir hora
-//         minute: "2-digit",
-//       }).format(date);
-//     },
-//   },
-
-//   {
-//     id: "actions",
-//     cell: ({ row }) => {
-//       const user = row.original
-
-//       return (
-//         <DropdownMenu>
-//           <DropdownMenuTrigger asChild>
-//             <Button variant="ghost" className="h-8 w-8 p-0">
-//               <span className="sr-only">Ações</span>
-//               <MoreHorizontal className="h-4 w-4" />
-//             </Button>
-//           </DropdownMenuTrigger>
-//           <DropdownMenuContent align="end">
-//             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-//             <DropdownMenuItem
-//               onClick={() => navigator.clipboard.writeText(user.id)}
-//             >
-//               Copiar Id
-//             </DropdownMenuItem>
-//             <DropdownMenuSeparator />
-//             <DropdownMenuItem>
-//                <Link href={`/usuarios/${user.id}`}>Ver Detalhes</Link>
-//             </DropdownMenuItem>
-//             <DropdownMenuItem>Editar</DropdownMenuItem>
-//           </DropdownMenuContent>
-//         </DropdownMenu>
-//       )
-//     },
-//   },
-
-// ];
+import { Patient } from "@/types/patient";
 
 export function TransactionsDataTable() {
   const router = useRouter(); // 3. Inicialize o router aqui
 
   // 4. Mova as colunas para dentro de um useMemo
-  const columns = useMemo<ColumnDef<User>[]>(() => [
+  const columns = useMemo<ColumnDef<Patient>[]>(() => [
     {
       id: "select",
       header: ({ table }) => (
@@ -116,9 +50,14 @@ export function TransactionsDataTable() {
       accessorKey: "name",
     },
     {
-      id: "email",
-      header: "Email",
-      accessorKey: "email",
+      id: "cpf",
+      header: "CPF",
+      accessorKey: "cpf",
+    },
+    {
+      id: "phone_number",
+      header: "Contato",
+      accessorKey: "phone_number",
     },
     {
       id: "created_at",
@@ -155,7 +94,7 @@ export function TransactionsDataTable() {
     {
       id: "actions",
       cell: ({ row, table }) => {
-        const user = row.original;
+        const patient = row.original;
 
         return (
           <DropdownMenu>
@@ -167,20 +106,14 @@ export function TransactionsDataTable() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(user.id)}
-              >
-                Copiar Id Técnico
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
 
-              <DropdownMenuItem onClick={() => router.push(`/usuarios/${user.id}`)}>
+              <DropdownMenuItem onClick={() => router.push(`/patient/${patient.id}`)}>
                 Ver Detalhes
               </DropdownMenuItem>
 
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() => table.options.meta?.handleDeleteRow(user.id, user.friendly_id)}
+                onClick={() => table.options.meta?.handleDeleteRow(patient.id, patient.friendly_id)}
                 variant="destructive"
               >
                 <Trash2Icon />
@@ -197,9 +130,9 @@ export function TransactionsDataTable() {
 
   return <DataTable
     columns={columns}
-    url="/users"
-    sortColumns={["friendly_id", "name", "email", "created_at"]}
-    urlDeleteBulk="/users/bulk"
-    modelName="Usuário"
+    url="/patients"
+    sortColumns={["friendly_id", "name", "cpf",  "phone_number", "created_at"]}
+    urlDeleteBulk="/patients/bulk"
+    modelName="Paciente"
   />;
 }

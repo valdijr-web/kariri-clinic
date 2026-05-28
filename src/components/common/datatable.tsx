@@ -198,7 +198,7 @@ export function DataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     // Define que o ID da linha para o React é o seu UUID técnico
-    getRowId: (row) => row.id,
+    //getRowId: (row) => row.id,
     onRowSelectionChange: setRowSelection,
     meta: {
       handleDeleteRow,

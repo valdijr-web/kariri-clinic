@@ -18,13 +18,13 @@ export default function SignupForm({
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        setError,
     } = useForm<SignUpFormSchema>({
         resolver: zodResolver(signUpFormSchema)
     });
 
     const router = useRouter();
-    const [error, setError] = useState();
 
     async function handleSignUp(data: SignUpFormSchema) {
         try {
@@ -35,14 +35,30 @@ export default function SignupForm({
 
             if (!result.ok) {
                 const errorData = await result.json()
-                setError(errorData.error);
-                return;
+                console.log(errorData.error);
+                throw {
+                    errors: errorData.errors,
+                    message: errorData.message || errorData.error
+                };
             }
             await refreshToken();
             router.push('/');
-        } catch (error) {
-            alert('Erro ao criar conta');
-            console.error(error);
+        } catch (err: any) {
+            // Caso o back-end retorne um objeto com erros por campo
+            const backendErrors = err.errors; // ex: { name: "Nome inválido", email: "Email duplicado" }
+            if (backendErrors && typeof backendErrors === 'object') {
+                Object.entries(backendErrors).forEach(([field, message]) => {
+                    setError(field, {
+                        type: 'backend',
+                        message: message as string
+                    });
+                });
+            } else {
+                // Erro geral (não associado a um campo)
+                setError('root', {
+                    message: err.message || 'Erro inesperado'
+                });
+            }
         }
     }
     return (
@@ -59,7 +75,11 @@ export default function SignupForm({
                     </p>
                 </div>
                 <div className='text-red-500 text-xs'>
-                    {error}
+                    {errors?.root && (
+                        <div className='text-red-500 text-xs'>
+                            {errors?.root.message}
+                        </div>
+                    )}
                 </div>
                 <Field>
                     <FieldLabel htmlFor="name">Seu Nome Completo</FieldLabel>
