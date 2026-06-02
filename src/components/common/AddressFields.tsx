@@ -48,17 +48,12 @@ export function AddressFields({
 
         form.setValue('address.street', data.street);
         form.setValue('address.neighborhood', data.neighborhood);
-        form.setValue('address.state', data.state);
+       form.setValue('address.state', data.state);
         form.setValue('address.city', data.city);
-        
         form.setFocus('address.number');
     };
 
     const errors = form.formState.errors;
-
-    React.useEffect(() => {
-        form.setValue('address.city', '')
-    }, [selectedState])
 
     return (
         <div>

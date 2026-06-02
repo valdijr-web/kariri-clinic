@@ -78,7 +78,7 @@ export function CitySelect({
 
     const { data: cities, isLoading } = useSWR<CityOption[]>(
         shouldFetch
-            ? `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios?orderBy=nome`
+            ? `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios`
             : null,
         fetcher,
         {
