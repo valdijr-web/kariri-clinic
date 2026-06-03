@@ -7,7 +7,7 @@ import { DataTable } from "@/components/common/datatable";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { User } from "@/types/user";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, Trash2Icon } from "lucide-react";
+import { CopyIcon, EyeIcon, MoreHorizontal, PencilIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
@@ -153,6 +153,22 @@ export function TransactionsDataTable() {
       },
     },
     {
+      id: "copy_id",
+      header: "Copiar ID",
+      cell: ({ row }) => {
+        const user = row.original;
+        return (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigator.clipboard.writeText(user.friendly_id.toString())}
+          >
+            <CopyIcon  />
+          </Button>
+        );
+      }
+    },
+    {
       id: "actions",
       cell: ({ row, table }) => {
         const user = row.original;
@@ -167,16 +183,19 @@ export function TransactionsDataTable() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(user.id)}
-              >
-                Copiar Id Técnico
-              </DropdownMenuItem>
+             
               <DropdownMenuSeparator />
 
+              <DropdownMenuItem onClick={() => router.push(`/usuarios/${user.id}/editar`)}>
+                <PencilIcon />
+                Editar
+              </DropdownMenuItem>
+
               <DropdownMenuItem onClick={() => router.push(`/usuarios/${user.id}`)}>
+                <EyeIcon />
                 Ver Detalhes
               </DropdownMenuItem>
+
 
               <DropdownMenuSeparator />
               <DropdownMenuItem

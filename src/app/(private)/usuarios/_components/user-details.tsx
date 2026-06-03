@@ -5,7 +5,7 @@ import { useState, useEffect, useTransition } from "react";
 import { User } from "@/types/pagination";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Mail, Calendar, Hash, RefreshCcw } from "lucide-react";
+import { ChevronLeft, Mail, Calendar, Hash, RefreshCcw, Pencil } from "lucide-react";
 import Link from "next/link";
 import { apiFetch } from "@/services/api";
 
@@ -65,11 +65,19 @@ export function UserDetails({ userId, initialUser }: UserDetailsProps) {
 
     return (
         <div className="space-y-6">
-            <div className="flex items-center gap-4">
-                <Button variant="outline" size="icon" asChild>
-                    <Link href="/usuarios"><ChevronLeft className="h-4 w-4" /></Link>
+            <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                    <Button variant="outline" size="icon" asChild>
+                        <Link href="/usuarios"><ChevronLeft className="h-4 w-4" /></Link>
+                    </Button>
+                    <h1 className="text-3xl font-bold tracking-tight">Ficha do Usuário</h1>
+                </div>
+                <Button asChild className="gap-2">
+                    <Link href={`/usuarios/${userId}/editar`}>
+                        <Pencil className="h-4 w-4" />
+                        Editar
+                    </Link>
                 </Button>
-                <h1 className="text-3xl font-bold tracking-tight">Ficha do Usuário</h1>
             </div>
 
             <Card className={loading ? "opacity-50 transition-opacity" : ""}>
