@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CirclePlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { apiFetch } from "@/services/api";
-import { AddressFields } from "@/components/common/AddressFields";
+import { AddressFields } from "@/components/common/address-fields";
 
 export default function CreatePatient() {
 
