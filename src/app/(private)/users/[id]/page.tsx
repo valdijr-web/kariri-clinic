@@ -1,4 +1,4 @@
-import { UserDetails } from "@/app/(private)/usuarios/_components/user-details";
+import { UserDetails } from "@/app/(private)/users/_components/user-details";
 import { apiServerFetch } from "@/services/api-server";
 import { User } from "@/types/user";
 

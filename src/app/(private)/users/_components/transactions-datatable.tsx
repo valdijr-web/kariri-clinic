@@ -12,72 +12,6 @@ import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 
-// const columns = [
-//   {
-//     id: "friendly_id",
-//     header: "ID",
-//     accessorKey: "friendly_id",
-//   },
-//   {
-//     id: "name",
-//     header: "Nome",
-//     accessorKey: "name",
-//   },
-//   {
-//     id: "email",
-//     header: "Email",
-//     accessorKey: "email",
-//   },
-//   {
-//     id: "created_at",
-//     header: "Data de Cadastro",
-//     accessorKey: "created_at",
-//     cell: ({ row }) => {
-//       const date = new Date(row.getValue("created_at"));
-
-//       return new Intl.DateTimeFormat("pt-BR", {
-//         day: "2-digit",
-//         month: "2-digit",
-//         year: "numeric",
-//         hour: "2-digit", // Opcional: adicione se quiser exibir hora
-//         minute: "2-digit",
-//       }).format(date);
-//     },
-//   },
-
-//   {
-//     id: "actions",
-//     cell: ({ row }) => {
-//       const user = row.original
-
-//       return (
-//         <DropdownMenu>
-//           <DropdownMenuTrigger asChild>
-//             <Button variant="ghost" className="h-8 w-8 p-0">
-//               <span className="sr-only">Ações</span>
-//               <MoreHorizontal className="h-4 w-4" />
-//             </Button>
-//           </DropdownMenuTrigger>
-//           <DropdownMenuContent align="end">
-//             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-//             <DropdownMenuItem
-//               onClick={() => navigator.clipboard.writeText(user.id)}
-//             >
-//               Copiar Id
-//             </DropdownMenuItem>
-//             <DropdownMenuSeparator />
-//             <DropdownMenuItem>
-//                <Link href={`/usuarios/${user.id}`}>Ver Detalhes</Link>
-//             </DropdownMenuItem>
-//             <DropdownMenuItem>Editar</DropdownMenuItem>
-//           </DropdownMenuContent>
-//         </DropdownMenu>
-//       )
-//     },
-//   },
-
-// ];
-
 export function TransactionsDataTable() {
   const router = useRouter(); // 3. Inicialize o router aqui
 
@@ -186,12 +120,12 @@ export function TransactionsDataTable() {
              
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem onClick={() => router.push(`/usuarios/${user.id}/editar`)}>
+              <DropdownMenuItem onClick={() => router.push(`/users/${user.id}/editar`)}>
                 <PencilIcon />
                 Editar
               </DropdownMenuItem>
 
-              <DropdownMenuItem onClick={() => router.push(`/usuarios/${user.id}`)}>
+              <DropdownMenuItem onClick={() => router.push(`/users/${user.id}`)}>
                 <EyeIcon />
                 Ver Detalhes
               </DropdownMenuItem>

@@ -67,7 +67,7 @@ const data = {
     },
     {
       title: "Usuários",
-      url: "/usuarios",
+      url: "/users",
       icon: (
         <ChartBarIcon
         />

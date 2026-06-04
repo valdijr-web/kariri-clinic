@@ -1,6 +1,6 @@
 'use client'
 
-import EditUserForm from "@/app/(private)/usuarios/_components/edit-user-form";
+import EditUserForm from "@/app/(private)/users/_components/edit-user-form";
 
 export default function EditUserPage() {
     return (

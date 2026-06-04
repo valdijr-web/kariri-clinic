@@ -99,7 +99,7 @@ export default function EditUserForm() {
             }
 
             toast.success("Usuário atualizado com sucesso!");
-            router.push(`/usuarios/${userId}`);
+            router.push(`/users/${userId}`);
         } catch (err: any) {
             // Caso o back-end retorne um objeto com erros por campo
             const backendErrors = err.errors;
@@ -141,7 +141,7 @@ export default function EditUserForm() {
                 <CardContent className="text-center space-y-4">
                     <p className="text-red-500 font-semibold">Não foi possível carregar os dados do usuário.</p>
                     <Button asChild>
-                        <Link href="/usuarios">
+                        <Link href="/users">
                             <ChevronLeft className="mr-2 h-4 w-4" />
                             Voltar para Usuários
                         </Link>
@@ -155,7 +155,7 @@ export default function EditUserForm() {
         <div className="space-y-6">
             <div className="flex items-center gap-4">
                 <Button variant="outline" size="icon" asChild>
-                    <Link href={`/usuarios/${userId}`}>
+                    <Link href={`/users/${userId}`}>
                         <ChevronLeft className="h-4 w-4" />
                     </Link>
                 </Button>
@@ -238,7 +238,7 @@ export default function EditUserForm() {
                             <Button
                                 type="button"
                                 variant="outline"
-                                onClick={() => router.push(`/usuarios/${userId}`)}
+                                onClick={() => router.push(`/users/${userId}`)}
                             >
                                 Cancelar
                             </Button>

@@ -68,12 +68,12 @@ export function UserDetails({ userId, initialUser }: UserDetailsProps) {
             <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                     <Button variant="outline" size="icon" asChild>
-                        <Link href="/usuarios"><ChevronLeft className="h-4 w-4" /></Link>
+                        <Link href="/users"><ChevronLeft className="h-4 w-4" /></Link>
                     </Button>
                     <h1 className="text-3xl font-bold tracking-tight">Ficha do Usuário</h1>
                 </div>
                 <Button asChild className="gap-2">
-                    <Link href={`/usuarios/${userId}/editar`}>
+                    <Link href={`/users/${userId}/editar`}>
                         <Pencil className="h-4 w-4" />
                         Editar
                     </Link>
