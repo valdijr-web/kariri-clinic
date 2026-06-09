@@ -239,12 +239,12 @@ export function DataTable<TData, TValue>({
           // Chamada real para sua API (substitua o alert)
           const response = await apiFetch(urlDeleteBulk, {
             method: "DELETE",
-            body: JSON.stringify({ user_ids: idsToDelete }),
+            body: JSON.stringify({ ids: idsToDelete }),
           });
           const data = await response.json();
 
           if (!response.ok) {
-            throw new Error(data.error || "Erro ao excluir usuários");
+            throw new Error(data.error || `Erro ao excluir ${nameChanged}!`);
           }
           toast.success(data.message);
           setRowSelection({});
