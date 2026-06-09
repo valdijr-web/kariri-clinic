@@ -1,16 +1,13 @@
 'use client'
 
-import React, { type FocusEvent } from 'react';
+import { type FocusEvent } from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form'
 
 import { Input } from '@/components/ui/input'
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { StateSelect } from './state-select';
-// import { StateSelect } from '@/components/forms/selects/state-select';
+import { StateSelect } from '@/components/common/state-select';
 import { CreatePatientSchema } from '@/schemas/create-patient-schema';
-import { toast } from 'sonner';
 import { apiFetch } from '@/services/api';
-import { AddressSchema } from '@/schemas/address-Schema';
 import { CitySelect } from './city-select';
 
 
@@ -34,7 +31,7 @@ export function AddressFields({
             method: 'GET',
         });
         const data = await result.json();
-        console.log(data);
+
         if (!result.ok) {
             data.errors?.zip_code?.map((msg: string) => {
                 form.setError("address.zip_code", {
@@ -48,7 +45,7 @@ export function AddressFields({
 
         form.setValue('address.street', data.street);
         form.setValue('address.neighborhood', data.neighborhood);
-       form.setValue('address.state', data.state);
+        form.setValue('address.state', data.state);
         form.setValue('address.city', data.city);
         form.setFocus('address.number');
     };
@@ -120,12 +117,6 @@ export function AddressFields({
             <FieldGroup className="grid grid-cols-2 md:grid-cols-2 gap-4 py-2">
                 <Field>
                     <FieldLabel className="font-semibold text-gray-700">Cidade</FieldLabel>
-                    {/* <Input {...form.register('address.city')} placeholder="Cidade" className="focus-visible:ring-blue-500" />
-                    {errors.address?.city && (
-                        <div className='text-red-500 text-xs'>
-                            {errors.address.city?.message}
-                        </div>
-                    )} */}
                     <Controller
                         name="address.city"
                         control={form.control}
@@ -137,11 +128,15 @@ export function AddressFields({
                             />
                         )}
                     />
+                    {errors.address?.city && (
+                        <div className="text-red-500 text-xs">
+                            {errors.address.city.message}
+                        </div>
+                    )}
                 </Field>
 
                 <Field>
                     <FieldLabel className="font-semibold text-gray-700">Estado</FieldLabel>
-                    {/* Componente customizado */}
                     <Controller
                         name="address.state"
                         control={form.control}
@@ -152,6 +147,11 @@ export function AddressFields({
                             />
                         )}
                     />
+                    {errors.address?.state && (
+                        <div className="text-red-500 text-xs">
+                            {errors.address.state.message}
+                        </div>
+                    )}
                 </Field>
 
             </FieldGroup>
