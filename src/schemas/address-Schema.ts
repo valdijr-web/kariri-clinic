@@ -27,9 +27,8 @@ export const addressSchema = z.object({
         .nullable(),
     state: z
         .string()
-        .min(2, "O estado deve conter no mínimo 2 caracteres")
         .max(255, "O estado deve conter no máximo 255 caracteres")
-        // .nullable(),
+        .nullable(),
 });
 
 export type AddressSchema = z.infer<typeof addressSchema>
