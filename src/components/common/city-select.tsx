@@ -65,10 +65,8 @@ const fetcher = async (
 
 export function CitySelect({
     state,
-
     value,
     onChange,
-
     disabled,
     placeholder = 'Selecione uma cidade',
 }: CitySelectProps) {
