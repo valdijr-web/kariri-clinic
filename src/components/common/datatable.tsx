@@ -161,14 +161,13 @@ export function DataTable<TData, TValue>({
 
   const handleDeleteRow = (rowId: number, friendlyId: number) => {
     confirm({
-      title: "Excluir registro?",
+      title: `Confirmar exclusão de ${modelName}?`,
       description: `Tem certeza que deseja excluir o registro ${friendlyId}?`,
       confirmText: "Excluir",
       cancelText: "Cancelar",
       variant: "danger",
       onConfirm: async () => {
         try {
-          // Chamada real para sua API (substitua o alert)
           const response = await apiFetch(`${url}/${rowId}`, {
             method: "DELETE",
           });
@@ -176,7 +175,7 @@ export function DataTable<TData, TValue>({
 
           if (!response.ok) {
             console.log(data);
-            throw new Error(data.error || "Erro ao excluir usuários!");
+            throw new Error(data.error || `Erro ao excluir ${modelName}!`);
           }
           mutate();
           toast.success(data.message);
@@ -236,7 +235,6 @@ export function DataTable<TData, TValue>({
       variant: "danger",
       onConfirm: async () => {
         try {
-          // Chamada real para sua API (substitua o alert)
           const response = await apiFetch(urlDeleteBulk, {
             method: "DELETE",
             body: JSON.stringify({ ids: idsToDelete }),
